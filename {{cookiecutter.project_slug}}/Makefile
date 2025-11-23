@@ -1,16 +1,16 @@
 NAME := {{cookiecutter.project_slug}}
 CRATE_NAME := {{cookiecutter.crate_name}}
-SPEC_FILE := $(NAME).spec
+SPEC_FILE := https://raw.githubusercontent.com/r0x0d/$(NAME)/refs/heads/main/$(NAME).spec
 
 all: copr-build srpm sources rust2rpm create-copr-repo
 
 .PHONY: create-copr-repo
 create-copr-repo:
-	copr create rust-$(NAME) \
-		{% for chroot in cookiecutter.chroots %}
+	copr create $(NAME) \
+		{% for chroot in cookiecutter.chroots.split(",") %}
 		--chroot {{chroot}} \
 		{% endfor %}
-		--packit-forge-project-allowed github.com/r0x0d/{{cookiecutter.project_slug}}
+		--auto-prune "on"
 
 .PHONY: create-gh-repo
 create-gh-repo:
@@ -35,7 +35,7 @@ srpm:
 .PHONY: copr-build
 copr-build:
 	copr build \
-	{% for chroot in cookiecutter.chroots %}
+	{% for chroot in cookiecutter.chroots.split(",") %}
 	--chroot {{chroot}} \
 	{% endfor %}	
 	$(NAME) $(NAME)*.src.rpm
