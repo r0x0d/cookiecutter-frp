@@ -1,5 +1,6 @@
 {
     "project_slug": "rust-my-awesome",
+    "pkg_name": "my-awesome",
     "upstream_repo": "https://github.com/my/awesome-repo",
     "tool_2_rpm": ["rust2rpm", "pyp2spec"],
     "year": "{% now 'utc', '%Y' %}",
