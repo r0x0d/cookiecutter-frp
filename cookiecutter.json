@@ -4,5 +4,6 @@
     "pkg_name": "rust-my-awesome",
     "tool_2_rpm": ["rust2rpm", "pyp2spec"],
     "year": "{% now 'utc', '%Y' %}",
+    "copr_username": "<your username>",
     "_extensions": ["jinja2_time.TimeExtension"]
 }
