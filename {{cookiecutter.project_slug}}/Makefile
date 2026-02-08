@@ -7,6 +7,7 @@ COPR_USERNAME := {{cookiecutter.copr_username}}
 create-copr-repo:
 	copr create \
 		--chroot fedora-43-x86_64 \
+		--chroot fedora-44-x86_64 \
 		--chroot fedora-rawhide-x86_64 \
 		$(NAME)
 
@@ -38,6 +39,7 @@ srpm:
 build: srpm
 	copr build $(NAME) $(NAME)*.src.rpm \
 		--chroot fedora-43-x86_64 \
+		--chroot fedora-44-x86_64 \
 		--chroot fedora-rawhide-x86_64
 
 .PHONY: logs
