@@ -3,6 +3,7 @@
     "pkg_name": "my-awesome",
     "upstream_repo": "https://github.com/my/awesome-repo",
     "tool_2_rpm": ["rust2rpm", "pyp2spec"],
+    "build_infra": ["copr", "fedpkg"],
     "year": "{% now 'utc', '%Y' %}",
     "copr_username": "<your username>",
     "_extensions": ["jinja2_time.TimeExtension"]

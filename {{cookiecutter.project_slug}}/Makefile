@@ -35,12 +35,17 @@ sources:
 srpm:
 	fedpkg srpm
 
+{% if cookiecutter.build_infra == "copr" %}
 .PHONY: build
 build: srpm
 	copr build $(NAME) $(NAME)*.src.rpm \
 		--chroot fedora-43-x86_64 \
 		--chroot fedora-44-x86_64 \
 		--chroot fedora-rawhide-x86_64
+{% else %}
+build:
+	fedpkg build --srpm --scratch
+{% endif %}
 
 .PHONY: logs
 logs:
