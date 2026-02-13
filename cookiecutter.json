@@ -5,6 +5,6 @@
     "tool_2_rpm": ["rust2rpm", "pyp2spec"],
     "build_infra": ["copr", "fedpkg"],
     "year": "{% now 'utc', '%Y' %}",
-    "copr_username": "<your username>",
+    "fas_username": "<your username>",
     "_extensions": ["jinja2_time.TimeExtension"]
 }

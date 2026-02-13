@@ -1,7 +1,13 @@
 NAME := {{cookiecutter.project_slug}}
 PKG_NAME := {{cookiecutter.pkg_name}}
 TOOL2RPM := {{cookiecutter.tool_2_rpm}}
-COPR_USERNAME := {{cookiecutter.copr_username}}
+FAS_USERNAME := {{cookiecutter.fas_username}}
+
+FILES_TO_SYNC := $(wildcard *.src.rpm) $(wildcard *.spec)
+
+ifneq ("$(wildcard rust2rpm.toml)","")
+FILES_TO_SYNC += rust2rpm.toml
+endif
 
 .PHONY: create-copr-repo
 create-copr-repo:
@@ -47,7 +53,11 @@ build:
 	fedpkg build --srpm --scratch
 {% endif %}
 
+.PHONY: sync
+sync:
+	scp $(FILES_TO_SYNC) $(FAS_USERNAME)@fedorapeople.org:/home/fedora/$(FAS_USERNAME)/public_html/$(NAME)
+
 .PHONY: logs
 logs:
 	@command -v fuzzytail > /dev/null || { echo >&2 "fuzzytail is not installed. Install with pip install fuzzytail"; }
-	fuzzytail watch $(COPR_USERNAME)/$(NAME)
+	fuzzytail watch $(FAS_USERNAME)/$(NAME)
